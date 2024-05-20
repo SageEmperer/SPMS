@@ -1,0 +1,74 @@
+{% extends 'base.html' %} <br />
+{% block title %}
+
+<title>Dashboard</title>
+
+{% endblock %} {% load static %} {% block css %}
+<!-- block for css file -->
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+
+{% endblock %}<!-- block for css end here -->
+
+{% block content %}<!-- this is content -->
+{% include 'navbar.html' %}<!-- this is navbar -->
+<div class="row">
+  <div class="col-3">
+    <div class="side">{% include 'sidebar.html' %}<!-- this is sidebar --></div>
+  </div>
+  <div class="col-8 mt-5">
+    <div class="container contend">
+      <div class="row gx-2 gy-3">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{parked_vehicle_count}}</div>
+            <div class="dis">Vehicles Parked</div>
+            <div class="icon">
+              <i class="fa-solid fa-square-parking"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{leaved_vehicle_count}}</div>
+            <div class="dis">Departed Vehicles</div>
+            <div class="icon"><i class="fa-solid fa-car"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{category_data_available}}</div>
+            <div class="dis">Available Category</div>
+            <div class="icon"><i class="fa-solid fa-box"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{parking_charge_sum}}</div>
+            <div class="dis">Total Earnings</div>
+            <div class="icon"><i class="fa-regular fa-money-bill-1"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{vehicle_count}}</div>
+            <div class="dis">Total Records</div>
+            <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="value">{{ total_vehicle_limit }}</div>
+            <div class="dis">Total Parking Slots</div>
+            <div class="icon"><i class="fa-solid fa-check-double"></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="row"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

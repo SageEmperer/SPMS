@@ -1,0 +1,38 @@
+nav{
+  background-color: #232D3F;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.767);
+}
+.person{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.person span{
+  margin-right: 10px;
+}
+.icon-text{
+  font-size: 25px;
+}
+.icon-text >.icon{
+  color: #3559E0;
+}
+.i{
+  color: #3559E0;
+}
+.S{
+  color: #3559E0;
+}
+.person-icon{
+  color:#232D3F; 
+  background-color: #3559E0;;
+  padding: 3px 7px;
+  border-radius: 50%;
+}  
+
+  
+
+

@@ -1,0 +1,18 @@
+.status-for-vehicle{
+  padding: 1px 5px;
+  border-radius: 10px;
+  color: white;
+}
+
+/* pagination */
+.pagination-container{
+  width: 100%;
+  padding: 10px 50px;
+}
+.pagination > li{
+  display: inline-block;
+}
+.green{
+  font-weight: 700;
+  
+}

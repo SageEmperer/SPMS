@@ -1,0 +1,165 @@
+{% extends 'base.html' %} <br />
+{% block title %}
+
+<title>Manage Vehicle</title>
+
+{% endblock %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/category.css' %}" />
+<link rel="stylesheet" href="{% static 'css/manage-vehicles.css' %}" />
+{% endblock %} {% block content %}<!-- this is content -->
+{% include 'navbar.html' %}<!-- this is navbar -->
+<div class="row">
+  <div class="col-3">{% include 'sidebar.html' %}<!-- this is sidebar --></div>
+  <div class="col-9">
+    <div class="container category gy-5 gx-2">
+      <br />
+      <br />
+
+      <!-- manage vehicle -->
+      <div class="row mt-3">
+        <div class="col-10">
+          <div class="manage-category-div">
+            <div class="manage-category-head">
+              <i class="fa-solid fa-list"></i> Manage Vehicle | Only the records
+              of the last 30 days are available here
+            </div>
+            <div class="manage-show-search">
+              <div class="show">
+                Show
+                <span class="show-input"
+                  ><input value="10" type="number"
+                /></span>
+                entries
+              </div>
+              <div class="search-input">
+                <form action="{% url 'manage_vehicles' %}" method="get">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="search"
+                      placeholder="Search"
+                      aria-describedby="search-icon"
+                      value="{{search_query}}"
+                    />
+
+                    <button
+                      type="submit"
+                      href=""
+                      class="input-group-text btn btn-primary"
+                    >
+                      search
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="manage-category-body">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vehicle Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Area No.</th>
+                    <th scope="col">Charge</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for vehicle in vehicle_data %}
+                  <tr>
+                    <th>{{forloop.counter}}</th>
+                    <td>{{vehicle.vehicle_no}}</td>
+                    <td>{{vehicle.vehicle_type}}</td>
+                    <td>{{vehicle.parking_area_no}}</td>
+                    <td>
+                      <span class="charge">$ </span> {{vehicle.parking_charge}}
+                    </td>
+                    <td>{{vehicle.arrival_time}}</td>
+                    {% if vehicle.status %}
+
+                    <td
+                      style="font-weight: 700"
+                      class="
+                      "
+                    >
+                      Parked
+                    </td>
+
+                    {% else %}
+                    <td
+                      style="font-weight: 700"
+                      class="
+                    "
+                    >
+                      Leaved
+                    </td>
+                    {% endif %}
+
+                    <td>
+                      <a
+                        href="{%  url 'change_status_manage_vehicle' vehicle.id %}"
+                        class="btn btn-secondary"
+                        >Done</a
+                      >
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- pagination -->
+
+              <div class="Page navigation example">
+                <div class="pagination justify-content-center">
+                  <div class="pagination">
+                    {% if category_data.has_previous %}
+                    <li class="page-item">
+                      <a href="?page=1" class="page-link">First</a>
+                    </li>
+                    <li class="page-item">
+                      <a
+                        href="/manage_vehicles/?page={{vehicle.previous_page_number}}"
+                        class="page-link"
+                        >Previous</a
+                      >
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                      <a href="?page=1" class="page-link">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="?page=2" class="page-link">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="?page=3" class="page-link">3</a>
+                    </li>
+                    {% if category_data.has_next %}
+                    <li class="page-item">
+                      <a
+                        href="manage_vehicles/?page={{vehicle.next_page_number}}"
+                        class="page-link"
+                        >Next</a
+                      >
+                    </li>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <!-- pagination end here -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- manage vehicle end here -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}

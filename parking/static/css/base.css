@@ -1,0 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul li.active {
+  background-color: #007bff; /* Highlight color */
+  color: #fff; /* Text color for the highlighted item */
+}
+ul li a{
+  text-decoration: none;
+}
+.activated{
+  padding: 5px 10px;
+  background-color: green;
+  border-radius: 10px;
+  color: white;
+}  
+.Deactivated{
+  padding: 5px 10px;
+  background-color: red;
+  border-radius: 10px;  
+  color: white;
+  
+}

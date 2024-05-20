@@ -1,0 +1,23 @@
+.search-div{
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+.search-head{
+  padding: 10px 20px;
+  background-color: rgba(128, 128, 128, 0.438);
+}
+.search-input-div{
+  padding: 20px 100px;
+}
+.input-group > input{
+  width: 70%;
+}
+.search-body{
+  padding: 10px 40px;
+}
+.search-head-span{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+

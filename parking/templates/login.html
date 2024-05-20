@@ -1,0 +1,113 @@
+{% extends 'base.html' %} <br />
+{% block title %}
+
+<title>Login</title>
+<style>
+  main {
+    width: 100%;
+    height: 100vh;
+    background-color: #232d3f;
+  }
+  nav {
+    padding-top: 0.2rem;
+    color: white;
+  }
+  .fa-car-side {
+    font-size: 25px;
+    color: #3559e0;
+    margin-right: 10px;
+  }
+  h3 > span {
+    color: #3559e0;
+  }
+  .bar {
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+  }
+  .form-container {
+    width: 100%;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form {
+    color: gray;
+    background-color: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    min-width: 250px;
+    width: 500px;
+    margin: 40px 10px;
+  }
+  .icon {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.74);
+  }
+  .icon i {
+    color: #3559e0;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+</style>
+{% endblock %} {% load static %} {% block css %}
+<!-- block for css file -->
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+{% endblock %}<!-- block for css end here -->
+
+<!--block for main content start here  -->
+{% block content %}
+<div class="container">
+  <nav>
+    <h3>
+      <span class="icon"><i class="fa-solid fa-car-side"></i>S</span>imple
+      Parking Management System
+    </h3>
+  </nav>
+  <br />
+  <div class="bar"></div>
+  <div class="form-container">
+    <form action="{% url 'login' %}" method="post">
+      {% csrf_token %} {% if messages %} {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message }}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %}
+      <div class="admin-icon-div text-center">
+        <div class="icon">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Admin Login
+        </div>
+      </div>
+      <br />
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" name="username" id="username" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+        />
+      </div>
+      <div class="d-grid mt-3">
+        <button class="btn btn-primary" type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+<!-- block for main contend end here -->

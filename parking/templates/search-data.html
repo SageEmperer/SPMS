@@ -1,0 +1,91 @@
+{% extends 'base.html' %} <br />
+{% block title %}
+
+<title>Search Data</title>
+
+{% endblock %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/category.css' %}" />
+<link rel="stylesheet" href="{% static 'css/manage-vehicles.css' %}" />
+<link rel="stylesheet" href="{% static 'css/search-data.css' %}" />
+{% endblock %} {% block content %}<!-- this is content -->
+{% include 'navbar.html' %}<!-- this is navbar -->
+<div class="row">
+  <div class="col-3">{% include 'sidebar.html' %}<!-- this is sidebar --></div>
+  <div class="col-9">
+    <div class="container category gy-5 gx-2">
+      <br />
+      <br />
+
+      <!-- search dta start here -->
+      <div class="row mt-3">
+        <div class="col-10">
+          <div class="search-div">
+            <div class="search-head">
+              <span class="search-head-span"
+                ><i class="fa-solid fa-magnifying-glass"></i> Search Data |
+              </span>
+              Only the records of the last 30 days are available here
+            </div>
+            <form action="{% url 'search_data' %}" method="get">
+              <div class="search-input-div">
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="search"
+                    placeholder="Search"
+                    aria-describedby="search-icon"
+                    value="{{search_query}}"
+                  />
+
+                  <button
+                    type="submit"
+                    href=""
+                    class="input-group-text btn btn-primary"
+                  >
+                    search
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div class="search-body">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vehicle Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Area No.</th>
+                    <th scope="col">Charge</th>
+                    <th scope="col">Arrival Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for vehicle in vehicle_data %}
+                  <tr>
+                    <th>{{vehicle.id}}</th>
+                    <td>{{vehicle.vehicle_no}}</td>
+                    <td>{{vehicle.vehicle_type}}</td>
+                    <td>{{vehicle.parking_area_no}}</td>
+                    <td>
+                      <span class="charge">$</span>{{vehicle.parking_charge}}
+                    </td>
+                    <td>{{vehicle.arrival_time}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- search data end here -->
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</div>

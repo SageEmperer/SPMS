@@ -1,0 +1,35 @@
+<ul>
+  <li class="{% if request.path == '/dashboard/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-gauge-high"></i></span>
+    <a href="{% url 'dashboard' %}"> Dashboard</a>
+  </li>
+  <li class="{% if request.path == '/category/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-box"></i></span>
+    <a href="{% url 'category' %}">Category</a>
+  </li>
+  <li class="{% if request.path == '/vehicle_entry/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-file-import"></i></span
+    ><a href="{% url 'vehicle_entry' %}"> Vehicle Entry</a>
+  </li>
+  <li class="{% if request.path == '/manage_vehicles/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-list"></i></span
+    ><a href="{% url 'manage_vehicles' %}"> Manage Vehicles</a>
+  </li>
+  <li class="{% if request.path == '/reports/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-chart-line"></i></span
+    >Reports
+  </li>
+  <li class="{% if request.path == '/search_data/' %}active{% endif %}">
+    <span class="sidebar-icon"
+      ><i class="fa-solid fa-magnifying-glass"></i></span
+    ><a href="{% url 'search_data' %}"> Search</a>
+  </li>
+  <li class="{% if request.path == '/account/' %}active{% endif %}">
+    <span class="sidebar-icon"><i class="fa-solid fa-gear"></i></span>
+    <a href="{% url 'account' %}"> Account Setting</a>
+  </li>
+  <li>
+    <span class="sidebar-icon"><i class="fa-solid fa-power-off"></i></span
+    ><a href="{% url 'logout' %}"> Logout</a>
+  </li>
+</ul>

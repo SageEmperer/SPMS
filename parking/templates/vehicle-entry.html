@@ -1,0 +1,255 @@
+{% extends 'base.html' %} <br />
+{% block title %}
+
+<title>Vehicle Entry</title>
+
+{% endblock %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+<link rel="stylesheet" href="{% static 'css/category.css' %}" />
+<link rel="stylesheet" href="{% static 'css/vehicle-entry.css' %}" />
+{% endblock %} {% block content %}<!-- this is content -->
+{% include 'navbar.html' %}
+<!-- this is navbar -->
+
+<div class="row">
+  <div class="col-3">{% include 'sidebar.html' %}<!-- this is sidebar --></div>
+  <div class="col-9">
+    <div class="container category gy-5 gx-2">
+      <br />
+      <br />
+      <!-- add vehicle and vehicle limits  -->
+      <div class="row g-2">
+        <!-- add vehicle -->
+        <div class="col-md-6">
+          <div class="add-category-div">
+            <div class="add-category-head">
+              <i class="fa-solid fa-list"></i> Add Vehicle
+            </div>
+            <div class="add-category-body">
+              <form action="{% url 'add_vehicle' %}" method="post">
+                {% csrf_token %}
+                <div class="row mb-3">
+                  <div class="col-6">
+                    <label for="parkingAreaNumber" class="form-label"
+                      >Vehicle Number</label
+                    >
+                    <input
+                      type="text"
+                      name="vehicleNumber"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <label for="parkingAreaNumber" class="form-label"
+                      >Vehicle Type</label
+                    >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="vehicleType"
+                    >
+                      <option selected>Select Vehicle Type</option>
+                      {% for x in category %}
+                      <option value="{{x.vehicle_type}}">
+                        {{x.vehicle_type}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="vehicleLimit" class="form-label"
+                      >Parking Area Number</label
+                    >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="parkingAreaNumber"
+                    >
+                      <option selected>Parking Area Number</option>
+                      {% for x in category %}
+                      <option value="{{x.parking_area_no}}">
+                        {{x.parking_area_no}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="parkingCharge" class="form-label"
+                      >Parking Charge</label
+                    >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="parkingCharge"
+                    >
+                      <option selected>Select Parking Charge</option>
+                      {% for x in category %}
+                      <option value="{{x.parking_charge}}">
+                        {{x.parking_charge}}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="row p-2">
+                  <button class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- add vehicle end here -->
+        <!-- vehicle limatations start here -->
+        <div class="col-md-4">
+          <div class="details-div">
+            <div class="details-head">
+              <i class="fa-solid fa-circle-info"></i> Details:
+            </div>
+            <div class="details-body">
+              <div class="details-lists">
+                {% for x in category %}
+                <div class="details-list">
+                  {{x.vehicle_type}}
+                  <span class="price"
+                    ><span
+                      class="bg-success text-white p-1"
+                      style="border-radius: 10px"
+                      >{{x.parking_charge}}</span
+                    >
+                    out of {{x.vehicle_limit}}</span
+                  >
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- vehicle limations end here -->
+      </div>
+      <!-- add vehicle and vehicle end here -->
+      <!-- current vehicles start here -->
+      <div class="row mt-3">
+        <div class="col-10">
+          <div class="manage-category-div">
+            <div class="manage-category-head">Current Vehicles</div>
+            <div class="manage-show-search">
+              <div class="show">
+                Show
+                <span class="show-input"
+                  ><input value="10" type="number"
+                /></span>
+                entries
+              </div>
+              <div class="search-input">
+                <form action="{% url 'vehicle_entry' %}" method="get">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="search"
+                      placeholder="Search"
+                      aria-describedby="search-icon"
+                      value="{{search_query}}"
+                    />
+
+                    <button
+                      type="submit"
+                      href=""
+                      class="input-group-text btn btn-primary"
+                    >
+                      search
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="manage-category-body">
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vehicle Number</th>
+                    <th scope="col">Area Number</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Status</th>
+
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for vehicle in vehicle_data %}
+                  <tr>
+                    <th>{{forloop.counter}}</th>
+                    <td>{{vehicle.vehicle_no}}</td>
+                    <td>{{vehicle.parking_area_no}}</td>
+                    <td>{{vehicle.arrival_time}}</td>
+                    <td>
+                      {% if vehicle.status %}
+                      <span class="status-for-vehicle bg-success">Parked</span>
+                      {% else %}
+                      <span class="status-for-vehicle bg-danger">Parked</span>
+                      {% endif %}
+                    </td>
+
+                    <td>
+                      <a class="btn btn-secondary">Receipt</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- pagination -->
+              <div class="Page navigation example">
+                <div class="pagination justify-content-center">
+                  <div class="pagination">
+                    {% if vehicle_data.has_previous %}
+                    <li class="page-item">
+                      <a href="?page=1" class="page-link">First</a>
+                    </li>
+                    <li class="page-item">
+                      <a
+                        href="/vehicle_entry/?page={{vehicle_data.previous_page_number}}"
+                        class="page-link"
+                        >Previous</a
+                      >
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                      <a href="?page=1" class="page-link">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="?page=2" class="page-link">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a href="?page=3" class="page-link">3</a>
+                    </li>
+                    {% if vehicle_data.has_next %}
+                    <li class="page-item">
+                      <a
+                        href="vehicle_entry/?page={{vehicle_data.next_page_number}}"
+                        class="page-link"
+                        >Next</a
+                      >
+                    </li>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <!-- pagination end here -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- current vehicle end here -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}
